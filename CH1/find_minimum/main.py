@@ -1,11 +1,14 @@
-def find_minimum(nums):
-    minimum = None;
-    if nums:
-        minimum = float("inf")
-        for i in nums:
-            if i <= minimum:
-                minimum = i;
+def find_minimum(nums: list[int]) -> float | None:
+    if not nums: 
+        return None
+    minimum = float("inf")
 
+    listLength = len(nums)
+
+    for i in range(0, listLength):
+        if nums[i] < minimum:
+            minimum = nums[i]
 
     return minimum
+
 
