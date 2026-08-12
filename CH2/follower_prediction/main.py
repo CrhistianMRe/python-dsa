@@ -1,11 +1,15 @@
-def get_follower_prediction(follower_count, influencer_type, num_months):
-    mult = None
+def get_follower_prediction(
+    follower_count: int, influencer_type: str, num_months: int
+) -> int:
+    result = 0
     if influencer_type == "fitness":
-        mult = 4
-    elif influencer_type == "cosmetic":
-        mult = 3 
-    else:
-        mult = 2
+        result = follower_count * 4 ** num_months
 
-    return follower_count * (mult ** num_months) 
+    elif influencer_type == "cosmetic":
+        result = follower_count * 3 ** num_months
+    else:
+        result = follower_count * 2 ** num_months
+
+    return result
+
 
