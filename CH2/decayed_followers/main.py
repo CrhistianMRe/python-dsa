@@ -1,5 +1,6 @@
-def decayed_followers(intl_followers, fraction_lost_daily, days):
-    remaining_total = 0 
-    retention_rate = 1- fraction_lost_daily
-    remaining_total = intl_followers * (retention_rate ** days)
-    return remaining_total
+def decayed_followers(
+    initial_followers: int, fraction_lost_daily: float, days: int
+) -> float:
+    return initial_followers * (1 - fraction_lost_daily) ** days
+
+
