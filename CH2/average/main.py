@@ -1,19 +1,11 @@
-def average_followers(nums):
-    result = None
-    if nums:
-        average = 0
-        for a in nums:
-            average += a
+def average_followers(nums: list[int]) -> float | None:
+    listLength = len(nums)
 
-        average = average/len(nums)
-        result = average
+    totalSum = 0
 
-    return result 
+    for i in nums:
+        totalSum += i
+
+    return totalSum / listLength
 
 
-
-
-
-
-
-    
