@@ -1,7 +1,6 @@
-def count_names(list_of_lists, target_name):
-    count = 0 
-    for list in list_of_lists:
-        for string in list:
-            if(string.find(target_name) != -1): count += 1
+def count_names(list_of_lists: list[list[str]], target_name: str) -> int:
+    count = 0
+    for nameList in list_of_lists:
+        for name in nameList:
+            if name == target_name: count += 1
     return count
-
