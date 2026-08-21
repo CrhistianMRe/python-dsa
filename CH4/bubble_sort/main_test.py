@@ -1,4 +1,4 @@
-from main import *
+from main import bubble_sort
 
 run_cases = [
     ([5, 7, 3, 6, 8], [3, 5, 6, 7, 8]),
@@ -17,9 +17,9 @@ submit_cases = run_cases + [
 def test(input1, expected_output):
     print("---------------------------------")
     print(f"Input:\n * {input1}")
-    print(f"Expecting: {expected_output}")
+    print(f"Expected: {expected_output}")
     result = bubble_sort(input1)
-    print(f"Actual: {result}")
+    print(f"Actual:   {result}")
     if result == expected_output:
         print("Pass")
         return True
@@ -52,3 +52,4 @@ if "__RUN__" in globals():
     test_cases = run_cases
 
 main()
+

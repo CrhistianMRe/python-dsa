@@ -1,16 +1,16 @@
-def bubble_sort(nums):
+def bubble_sort(nums: list[int]) -> list[int]:
     swapping = True
     end = len(nums)
-    while(swapping):
+
+    while swapping:
         swapping = False
-        for start in range(1, end):
-            if(nums[start-1] > nums[start]): 
-                temporal = nums[start-1]
-                nums[start-1] = nums[start]
-                nums[start] = temporal
+        for i in range(1, end):
+            if nums[i-1] > nums[i]:
+                temp = nums[i-1]
+                nums[i-1] = nums[i]
+                nums[i] = temp
                 swapping = True
-        end -= 1
+        end = end-1
+
     return nums
-
-
 
