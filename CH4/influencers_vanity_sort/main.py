@@ -9,11 +9,8 @@ class Influencer:
 
 # dont touch above this line
 
-
 def vanity(influencer):
-     return (influencer.num_bio_links * 5 ) + influencer.num_selfies
-    
-
+    return (influencer.num_bio_links * 5) + influencer.num_selfies
 
 
 def vanity_sort(influencers):

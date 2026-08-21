@@ -1,4 +1,4 @@
-from main import *
+from main import Influencer, vanity_sort
 
 theprimeagen = Influencer(100, 1)
 pokimane = Influencer(800, 2)
@@ -25,9 +25,9 @@ submit_cases = run_cases + [
 def test(input1, expected_output):
     print("---------------------------------")
     print(f"Input:\n * {input1}")
-    print(f"Expecting: {expected_output}")
+    print(f"Expected: {expected_output}")
     result = vanity_sort(input1)
-    print(f"Actual: {result}")
+    print(f"Actual:   {result}")
     if result == expected_output:
         print("Pass")
         return True
@@ -60,3 +60,4 @@ if "__RUN__" in globals():
     test_cases = run_cases
 
 main()
+
