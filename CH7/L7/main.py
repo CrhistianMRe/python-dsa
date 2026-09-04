@@ -1,21 +1,18 @@
 from stack import Stack
 
 
-def is_balanced(input_str):
+def is_balanced(input_str: str) -> bool:
     stack = Stack()
 
-    for c in input_str:
+    for i in input_str:
+        if (i == "("):
+            stack.push(i)
+        elif (i == ")" and stack.size() == 0):
+            stack.push(i)
+        else:
+            stack.pop()
 
-        if(c == ")"):
-            tempResult = stack.pop()
-            if(not tempResult): return False;
-
-        if(c == "("):
-           stack.push(c)
     return stack.size() == 0
-
-
-
 
 
 
