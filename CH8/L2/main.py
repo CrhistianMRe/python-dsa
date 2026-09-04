@@ -1,19 +1,21 @@
-class Queue:
-    def __init__(self):
-        self.items = []
+from typing import Any
 
-    def push(self, item):
+
+class Queue:
+    def __init__(self) -> None:
+        self.items: list[Any] = []
+
+    def push(self, item: Any) -> None:
         self.items.insert(0, item)
 
-    def pop(self):
-        if(not self.items): return None
-        item = self.items[self.size() - 1]
-        self.items.pop()
-        return item
+    def pop(self) -> Any:
+        if(self.size() == 0): return None
+        return self.items.pop(self.size() - 1)
 
-    def peek(self):
-        if(not self.items): return None
-        return self.items[self.size() - 1]
+    def peek(self) -> Any:
+        if(self.size() == 0): return None
+        return self.items[self.size() -1]
 
-    def size(self):
+    def size(self) -> int:
         return len(self.items)
+

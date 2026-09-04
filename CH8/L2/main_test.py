@@ -1,3 +1,5 @@
+import pytest
+
 from main import Queue
 
 run_cases = [
@@ -15,11 +17,19 @@ run_cases = [
         ],
         [2, "Egwene", 1],
     ),
+    (
+        [("push", "Aviendha"), ("pop", None), ("peek", None)],
+        ["Aviendha", None],
+    ),
 ]
 
-submit_cases = run_cases + [
-    ([("pop", None), ("peek", None), ("size", None)], [None, None, 0]),
-    (
+submit_cases = [
+    pytest.param(
+        [("pop", None), ("peek", None), ("size", None)],
+        [None, None, 0],
+        marks=pytest.mark.submit,
+    ),
+    pytest.param(
         [
             ("push", "Perrin"),
             ("push", "Moiraine"),
@@ -29,10 +39,12 @@ submit_cases = run_cases + [
             ("peek", None),
         ],
         ["Perrin", "Moiraine", "Lan"],
+        marks=pytest.mark.submit,
     ),
-    (
+    pytest.param(
         [("push", "Thom"), ("pop", None), ("push", "Loial"), ("peek", None)],
         ["Thom", "Loial"],
+        marks=pytest.mark.submit,
     ),
 ]
 
@@ -43,8 +55,9 @@ def visualize_queue(queue):
     return "\n".join([f"- {item}" for item in reversed(queue.items)])
 
 
-def test(operations, expected_outputs):
-    print("---------------------------------")
+@pytest.mark.parametrize(("operations", "expected_outputs"), run_cases + submit_cases)
+def test_queue(operations, expected_outputs):
+    print("\n---------------------------------")
     queue = Queue()
     outputs = []
     for op, value in operations:
@@ -70,35 +83,5 @@ def test(operations, expected_outputs):
 
     print(f"Expected: {expected_outputs}")
     print(f"Actual: {outputs}")
-    if outputs == expected_outputs:
-        print("Pass")
-        return True
-    print("Fail")
-    return False
+    assert outputs == expected_outputs
 
-
-def main():
-    passed = 0
-    failed = 0
-    skipped = len(submit_cases) - len(test_cases)
-    for test_case in test_cases:
-        correct = test(*test_case)
-        if correct:
-            passed += 1
-        else:
-            failed += 1
-    if failed == 0:
-        print("============= PASS ==============")
-    else:
-        print("============= FAIL ==============")
-    if skipped > 0:
-        print(f"{passed} passed, {failed} failed, {skipped} skipped")
-    else:
-        print(f"{passed} passed, {failed} failed")
-
-
-test_cases = submit_cases
-if "__RUN__" in globals():
-    test_cases = run_cases
-
-main()
