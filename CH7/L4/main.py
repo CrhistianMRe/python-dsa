@@ -1,24 +1,21 @@
-class Stack:
-    def __init__(self):
-        self.items = []
+from typing import Any
 
-    def push(self, item):
+
+class Stack:
+    def __init__(self) -> None:
+        self.items: list[Any] = []
+
+    def push(self, item: Any) -> None:
         self.items.append(item)
 
-    def size(self):
+    def size(self) -> int:
         return len(self.items)
 
-    def peek(self):
-        length = len(self.items)
+    def peek(self) -> Any:
+        if self.size() < 1: return None
+        return self.items[self.size() - 1]
 
-        if(length == 0): return None
-        return self.items[length -1]
-
-    def pop(self):
-        length = len(self.items)
-
-        if(length == 0): return None
-        item = self.items[length - 1]
-        self.items.pop(length -1)
-        return item
+    def pop(self) -> Any:
+        if self.size() < 1: return None
+        return self.items.pop(self.size() - 1)
 
