@@ -1,4 +1,6 @@
-from main import *
+import pytest
+
+from main import Stack
 
 run_cases = [
     (
@@ -22,15 +24,16 @@ run_cases = [
     ),
 ]
 
-submit_cases = run_cases + [
-    (
+submit_cases = [
+    pytest.param(
         [
             ("size", None),
         ],
         0,
         None,
+        marks=pytest.mark.submit,
     ),
-    (
+    pytest.param(
         [
             ("push", {"name": "Frank", "experience": "5 years"}),
             ("push", {"name": "Grace", "education": "MBA"}),
@@ -40,8 +43,9 @@ submit_cases = run_cases + [
         ],
         4,
         "Ivy",
+        marks=pytest.mark.submit,
     ),
-    (
+    pytest.param(
         [
             ("push", {"name": "Jack", "connections": 500}),
             ("size", None),
@@ -50,12 +54,17 @@ submit_cases = run_cases + [
         ],
         2,
         "Kelly",
+        marks=pytest.mark.submit,
     ),
 ]
 
 
-def test(operations, expected_output, expected_name_at_top):
-    print("---------------------------------")
+@pytest.mark.parametrize(
+    ("operations", "expected_output", "expected_name_at_top"),
+    run_cases + submit_cases,
+)
+def test_stack(operations, expected_output, expected_name_at_top):
+    print("\n---------------------------------")
     stack = Stack()
     result = None
     for op, value in operations:
@@ -67,44 +76,11 @@ def test(operations, expected_output, expected_name_at_top):
 
     print(f"Expecting size: {expected_output}")
     print(f"Actual size: {result}")
-    size_pass = result == expected_output
+    assert result == expected_output
 
-    name_pass = True
     if len(stack.items) > 0:
         name_at_top = stack.items[-1]["name"]
         print(f"Expecting last added name: {expected_name_at_top}")
         print(f"Actual last added name: {name_at_top}")
-        name_pass = name_at_top == expected_name_at_top
+        assert name_at_top == expected_name_at_top
 
-    if size_pass and name_pass:
-        print("Pass")
-        return True
-    print("Fail")
-    return False
-
-
-def main():
-    passed = 0
-    failed = 0
-    skipped = len(submit_cases) - len(test_cases)
-    for test_case in test_cases:
-        correct = test(*test_case)
-        if correct:
-            passed += 1
-        else:
-            failed += 1
-    if failed == 0:
-        print("============= PASS ==============")
-    else:
-        print("============= FAIL ==============")
-    if skipped > 0:
-        print(f"{passed} passed, {failed} failed, {skipped} skipped")
-    else:
-        print(f"{passed} passed, {failed} failed")
-
-
-test_cases = submit_cases
-if "__RUN__" in globals():
-    test_cases = run_cases
-
-main()

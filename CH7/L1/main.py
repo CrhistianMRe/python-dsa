@@ -1,10 +1,13 @@
-class Stack:
-    def __init__(self):
-        self.items = []
+from typing import Any
 
-    def push(self, item):
+
+class Stack:
+    def __init__(self) -> None:
+        self.items: list[Any] = []
+
+    def push(self, item: Any) -> None:
         self.items.append(item)
 
-    def size(self):
+    def size(self) -> int:
         return len(self.items)
 
