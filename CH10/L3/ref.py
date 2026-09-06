@@ -1,4 +1,4 @@
-from main import *
+from main import BSTNode
 
 
 def ref_implementation(self, val):
