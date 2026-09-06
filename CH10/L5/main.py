@@ -1,26 +1,26 @@
+from typing import Any
+
+
 class BSTNode:
-    def get_min(self):
-        temp = self.val 
-        if(self.left != None):
+    def get_min(self) -> Any:
+        if(not(self.left == None)):
             return self.left.get_min()
-        return temp
+        return self.val
 
 
-
-    def get_max(self):
-        temp = self.val
-        if(self.right != None):
+    def get_max(self) -> Any:
+        if(not(self.right == None)):
             return self.right.get_max()
-        return temp
+        return self.val
 
     # don't touch below this line
 
-    def __init__(self, val=None):
-        self.left = None
-        self.right = None
+    def __init__(self, val: Any = None) -> None:
+        self.left: "BSTNode | None" = None
+        self.right: "BSTNode | None" = None
         self.val = val
 
-    def insert(self, val):
+    def insert(self, val: Any) -> None:
         if not self.val:
             self.val = val
             return
