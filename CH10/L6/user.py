@@ -2,7 +2,7 @@ import random
 
 
 class User:
-    def __init__(self, id):
+    def __init__(self, id: int) -> None:
         self.id = id
         user_names = [
             "Blake",
@@ -27,20 +27,20 @@ class User:
         ]
         self.user_name = f"{user_names[id % len(user_names)]}#{id}"
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         return isinstance(other, User) and self.id == other.id
 
-    def __lt__(self, other):
+    def __lt__(self, other: "User") -> bool:
         return isinstance(other, User) and self.id < other.id
 
-    def __gt__(self, other):
+    def __gt__(self, other: "User") -> bool:
         return isinstance(other, User) and self.id > other.id
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "".join(self.user_name)
 
 
-def get_users(num):
+def get_users(num: int) -> list[User]:
     random.seed(1)
     users = []
     ids = []

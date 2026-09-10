@@ -28,3 +28,4 @@ def ref_inorder(self, visited):
     if self.right:
         visited = ref_inorder(self.right, visited)
     return visited
+

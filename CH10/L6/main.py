@@ -1,40 +1,30 @@
+from typing import Any
+
+
 class BSTNode:
-    def delete(self, val):
+    def delete(self, val: Any) -> "BSTNode | None":
         if(self.val == None): return None
 
-        rightExists = self.right != None
-        leftExists = self.left != None
-
-        if(val < self.val):
-            if(leftExists):
+        if(self.val > val):
+            if(not (self.left == None)):
                 self.left = self.left.delete(val)
-            return self
+                return self
 
-        if(val > self.val):
-            if(rightExists):
+        if(self.val < val):
+            if(not (self.right == None)):
                 self.right = self.right.delete(val)
-            return self
+                return self
 
-        if(val == self.val):
-            if(not rightExists):
+        if(self.val == val):
+            if(self.right == None):
                 return self.left
-            if(not leftExists):
+            if(self.left == None):
                 return self.right
-            if(leftExists and rightExists):
-                temp = self.right
-                while(temp.left != None):
-                    temp = temp.left
 
-                self.val = temp.val
+            if(self.left and self.right):
+                self.val = self.right.get_min()
                 self.right = self.right.delete(self.val)
                 return self
-                
-                
-
-
-
-
-
 
 
 
@@ -42,12 +32,12 @@ class BSTNode:
 
     # don't touch below this line
 
-    def __init__(self, val=None):
-        self.left = None
-        self.right = None
+    def __init__(self, val: Any = None) -> None:
+        self.left: "BSTNode | None" = None
+        self.right: "BSTNode | None" = None
         self.val = val
 
-    def insert(self, val):
+    def insert(self, val: Any) -> None:
         if not self.val:
             self.val = val
             return
@@ -67,13 +57,13 @@ class BSTNode:
             return
         self.right = BSTNode(val)
 
-    def get_min(self):
+    def get_min(self) -> Any:
         current = self
         while current.left is not None:
             current = current.left
         return current.val
 
-    def get_max(self):
+    def get_max(self) -> Any:
         current = self
         while current.right is not None:
             current = current.right
